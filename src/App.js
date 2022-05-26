@@ -16,8 +16,10 @@ function App() {
   const [blueSide, setBlueSide] = useState(blankSide);
 
   function reset() {
-    setRedSide(blankSide);
-    setBlueSide(blankSide);
+    if (window.confirm('Are you sure?')) {
+      setRedSide(blankSide);
+      setBlueSide(blankSide);
+    }
   }
 
   function updatePegs(side, plusValue) {
@@ -67,15 +69,31 @@ function App() {
 
   return (
     <div className="App">
-      <Box sx={{ textAlign: 'center', color: '#dfdfdf' }}>
-        <Typography variant='h4'>Cribbage</Typography>
+      <Box sx={{ color: '#dfdfdf' }}>
+        <Grid
+          container
+          justifyContent='space-between'
+          flexWrap='nowrap'
+          sx={{
+            width: 460,
+            margin: '16px auto 0',
+           }}
+        >
+          <Grid item sx={{ width: 'content' }}>
+            <Typography variant='h4'>Cribbage</Typography>
+          </Grid>
+          <Grid item>
+            <Button onClick={reset} variant='text'>Reset</Button>
+          </Grid>
+        </Grid>
       </Box>
       <Grid container justifyContent='center'>
         <Grid item>
           <Grid
             container
-            spacing={2}
+            spacing={1}
             justifyContent='center'
+            alignItems='center'
             direction='column'
             sx={{ padding: 2 }}
           >
@@ -94,6 +112,18 @@ function App() {
               >
                 1
               </Button>
+            </Grid>
+            <Grid item>
+              <Box sx={{
+                color: '#dfdfdf',
+                border: '1px solid #dfdfdf',
+                borderRadius: 1,
+                padding: '0 4px 2px 4px',
+                width: 30,
+                textAlign: 'center',
+              }}>
+                {blueSide.score}
+              </Box>
             </Grid>
             <Grid item>
               <Button
@@ -119,8 +149,9 @@ function App() {
         <Grid item>
           <Grid
             container
-            spacing={2}
+            spacing={1}
             justifyContent='center'
+            alignItems='center'
             direction='column'
             sx={{ padding: 2 }}
           >
@@ -143,6 +174,18 @@ function App() {
               </Button>
             </Grid>
             <Grid item>
+              <Box sx={{
+                color: '#dfdfdf',
+                border: '1px solid #dfdfdf',
+                borderRadius: 1,
+                padding: '0 4px 2px 4px',
+                width: 30,
+                textAlign: 'center',
+              }}>
+                {redSide.score}
+              </Box>
+            </Grid>
+            <Grid item>
               <Button
                 onClick={() => updatePegs('red', -1)}
                 startIcon={<ArrowDown />}
@@ -163,9 +206,6 @@ function App() {
           </Grid>
         </Grid>
       </Grid>
-      <Box sx={{ textAlign: 'center' }}>
-        <Button onClick={reset}>Reset</Button>
-      </Box>
     </div>
   );
 }
