@@ -1,16 +1,9 @@
-/**
- * Rules:
- *    row 1 & 12 - blue
- *    row 2 - 11 alternate two at a time starting with red
- *    red overrides - (0,1) (0,2) (0,5) (0,6) (0,9) (0,10)
- *    blue overrides - (20,0) (20,12)
- * 
- * green = red
- * yellow = blue
- */
 import { useTheme } from '@mui/material';
-import dotImage from '../dot.png';
+
+import dotImage from '../images/dot.png';
 import { board1 } from '../board1';
+
+console.log(board1.blueCells.length, board1.redCells.length);
 
 function Cell({ color, hasPeg, btmBorder }) {
   const borderColor = 'gray';
@@ -82,7 +75,6 @@ export default function Board({ redPos, bluePos }) {
 
     rows.push(<tr>{cells}</tr>);
   }
-
 
   return (
     <table style={{
