@@ -3,8 +3,6 @@ import { useTheme } from '@mui/material';
 import dotImage from '../images/dot.png';
 import { board1 } from '../board1';
 
-console.log(board1.blueCells.length, board1.redCells.length);
-
 function Cell({ color, hasPeg, btmBorder }) {
   const borderColor = 'gray';
   const style = {
@@ -70,10 +68,17 @@ export default function Board({ redPos, bluePos }) {
         btmBorder = true;
       }
 
-      cells.push(<Cell color={color} hasPeg={hasPeg} btmBorder={btmBorder} />);
+      cells.push(
+        <Cell
+          color={color}
+          hasPeg={hasPeg}
+          btmBorder={btmBorder}
+          key={`${row},${col}`}
+        />
+      );
     }
 
-    rows.push(<tr>{cells}</tr>);
+    rows.push(<tr key={`${row}`}>{cells}</tr>);
   }
 
   return (
