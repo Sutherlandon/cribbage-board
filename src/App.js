@@ -9,7 +9,7 @@ import { useState } from 'react';
 import Button from './components/CustomButton';
 import Board from './components/Board';
 
-const blankSide = { score: 0, p1: 0, p2: 1 };
+const blankSide = { score: 2, p1: 0, p2: 1 };
 
 function App() {
   const [movedLast, setMovedLast] = useState();
@@ -54,12 +54,12 @@ function App() {
 
     // zero is the floor
     if (update.p1 < 0) update.p1 = 0;
-    if (update.p2 < 0) update.p2 = 0;
-    if (update.score < 0) update.score = 0;
+    if (update.p2 < 1) update.p2 = 1;
+    if (update.score < 2) update.score = 2;
 
     // 120 is the ceiling
-    if (update.p1 > 120) update.p1 = 120;
-    if (update.p2 > 120) update.p2 = 120;
+    if (update.p1 > 119) update.p1 = 119;
+    if (update.p2 > 119) update.p2 = 119;
     if (update.score > 120) update.score = 120;
 
     // commit updates
