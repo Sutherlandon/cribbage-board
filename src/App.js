@@ -3,7 +3,7 @@ import ArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import DoubleArrowUp from '@mui/icons-material/KeyboardDoubleArrowUp';
 import DoubleArrowDown from '@mui/icons-material/KeyboardDoubleArrowDown';
 import Cached from '@mui/icons-material/Cached';
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid, IconButton, Typography } from '@mui/material';
 import { useState } from 'react';
 
 import Button from './components/CustomButton';
@@ -15,13 +15,17 @@ function App() {
   const [movedLast, setMovedLast] = useState();
   const [redSide, setRedSide] = useState(blankSide);
   const [blueSide, setBlueSide] = useState(blankSide);
-  const [rotate, setRotate] = useState(true);
+  const [rotate, setRotate] = useState({ left: true, right: false });
 
   function reset() {
     if (window.confirm('Are you sure?')) {
       setRedSide(blankSide);
       setBlueSide(blankSide);
     }
+  }
+
+  function rotateSide(side) {
+    setRotate({ ...rotate, [side]: !rotate[side] });
   }
 
   function updatePegs(side, plusValue) {
@@ -77,19 +81,34 @@ function App() {
       <Box sx={{ color: '#dfdfdf' }}>
         <Grid
           container
-          justifyContent='space-between'
           flexWrap='nowrap'
           sx={{
-            width: 460,
+            width: 640,
             margin: '16px auto 0',
-           }}
+          }}
         >
+          <Grid item>
+            <IconButton
+              color='primary'
+              onClick={() => rotateSide('left')}
+              sx={{ ml: '13px', mr: '38px' }}
+            >
+              <Cached />
+            </IconButton>
+          </Grid>
           <Grid item sx={{ width: 'content' }}>
             <Typography variant='h4'>Cribbage</Typography>
           </Grid>
-          <Grid item sx={{ marginRight: '-100px' }}>
+          <Grid item sx={{ flexGrow: 1 }} />
+          <Grid item>
             <Button onClick={reset} variant='text'>Reset</Button>
-            <Button onClick={() => setRotate(!rotate)} variant='text' startIcon={<Cached />} />
+            <IconButton
+              color='primary'
+              onClick={() => rotateSide('right')}
+              sx={{ ml: '28px', mr: '13px' }}
+            >
+              <Cached />
+            </IconButton>
           </Grid>
         </Grid>
       </Box>
@@ -100,69 +119,24 @@ function App() {
             justifyContent='center'
             alignItems='center'
             direction='column'
-            sx={{ padding: 2 }}
+            sx={{
+              padding: 2,
+              transform: rotate.left ? 'rotate(180deg)' : 'none'
+            }}
           >
-            <Grid item>
-              <Button
-                onClick={() => updatePegs('blue', 5)}
-                startIcon={<DoubleArrowUp />}
-              >
-                5
-              </Button>
-            </Grid>
-            <Grid item>
-              <Button
-                onClick={() => updatePegs('blue', 1)}
-                startIcon={<ArrowUp />}
-              >
-                1
-              </Button>
-            </Grid>
             <Grid item>
               <Box sx={{
                 color: '#dfdfdf',
                 border: '1px solid #dfdfdf',
                 borderRadius: 1,
-                padding: '0 4px 2px 4px',
                 my: 1,
+                padding: '0 4px 2px 4px',
                 width: 30,
                 textAlign: 'center',
               }}>
-                {blueSide.score}
+                {redSide.score}
               </Box>
             </Grid>
-            <Grid item>
-              <Button
-                onClick={() => updatePegs('blue', -1)}
-                startIcon={<ArrowDown />}
-              >
-                1
-              </Button>
-            </Grid>
-            <Grid item>
-              <Button
-                onClick={() => updatePegs('blue', -5)}
-                startIcon={<DoubleArrowDown />}
-              >
-                5
-              </Button>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item>
-          <Board redPos={redSide} bluePos={blueSide} />
-        </Grid>
-        <Grid item>
-          <Grid
-            container
-            justifyContent='center'
-            alignItems='center'
-            direction='column'
-            sx={{
-              padding: 2,
-              transform: rotate ? 'rotate(180deg)' : 'none'
-            }}
-          >
             <Grid item>
               <Button
                 onClick={() => updatePegs('red', 5)}
@@ -182,19 +156,6 @@ function App() {
               </Button>
             </Grid>
             <Grid item>
-              <Box sx={{
-                color: '#dfdfdf',
-                border: '1px solid #dfdfdf',
-                borderRadius: 1,
-                my: 1,
-                padding: '0 4px 2px 4px',
-                width: 30,
-                textAlign: 'center',
-              }}>
-                {redSide.score}
-              </Box>
-            </Grid>
-            <Grid item>
               <Button
                 onClick={() => updatePegs('red', -1)}
                 startIcon={<ArrowDown />}
@@ -208,6 +169,67 @@ function App() {
                 onClick={() => updatePegs('red', -5)}
                 startIcon={<DoubleArrowDown />}
                 color='secondary'
+              >
+                5
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item>
+          <Board redPos={redSide} bluePos={blueSide} />
+        </Grid>
+        <Grid item>
+          <Grid
+            container
+            justifyContent='center'
+            alignItems='center'
+            direction='column'
+            sx={{
+              padding: 2,
+              transform: rotate.right ? 'rotate(180deg)' : 'none'
+            }}
+          >
+            <Grid item>
+              <Box sx={{
+                color: '#dfdfdf',
+                border: '1px solid #dfdfdf',
+                borderRadius: 1,
+                padding: '0 4px 2px 4px',
+                my: 1,
+                width: 30,
+                textAlign: 'center',
+              }}>
+                {blueSide.score}
+              </Box>
+            </Grid>
+            <Grid item>
+              <Button
+                onClick={() => updatePegs('blue', 5)}
+                startIcon={<DoubleArrowUp />}
+              >
+                5
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                onClick={() => updatePegs('blue', 1)}
+                startIcon={<ArrowUp />}
+              >
+                1
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                onClick={() => updatePegs('blue', -1)}
+                startIcon={<ArrowDown />}
+              >
+                1
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                onClick={() => updatePegs('blue', -5)}
+                startIcon={<DoubleArrowDown />}
               >
                 5
               </Button>
