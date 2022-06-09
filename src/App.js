@@ -1,11 +1,12 @@
 import { Grid, } from '@mui/material';
 import { useState } from 'react';
+import last from 'lodash.last';
 
 import Board from './components/Board';
 import Header from './components/Header';
 import SideButtons from './components/SideButtons';
 
-const blankSide = { score: 2, p1: 0, p2: 1 };
+const blankSide = [{ score: 2, p1: 0, p2: 1 }];
 
 function App() {
   const [movedLast, setMovedLast] = useState();
@@ -21,53 +22,72 @@ function App() {
   }
 
   function updatePegs(side, plusValue) {
-    let update;
+    let newPos;
     // get the starting state
     if (side === 'left') {
-      update = { ...leftSide };
+      newPos = { ...last(leftSide) };
     } else {
-      update = { ...rightSide };
+      newPos = { ...last(rightSide) };
     }
 
-    // make the updates
-    update.score += plusValue;
+    // make the newPoss
+    newPos.score += plusValue;
 
     // repeated moves increment the forward most peg
     if (movedLast === side) {
-      if (update.p1 > update.p2) {
-        update.p1 += plusValue;
+      if (newPos.p1 > newPos.p2) {
+        newPos.p1 += plusValue;
       } else {
-        update.p2 += plusValue;
+        newPos.p2 += plusValue;
       }
     } else {
       // bring the one from behind
-      if (update.p1 < update.p2) {
-        update.p1 = update.p2 + plusValue;
+      if (newPos.p1 < newPos.p2) {
+        newPos.p1 = newPos.p2 + plusValue;
       } else {
-        update.p2 = update.p1 + plusValue;
+        newPos.p2 = newPos.p1 + plusValue;
       }
     }
 
-    // zero is the floor
-    if (update.p1 < 0) update.p1 = 0;
-    if (update.p2 < 1) update.p2 = 1;
-    if (update.score < 2) update.score = 2;
-
     // 120 is the ceiling
-    if (update.p1 > 119) update.p1 = 119;
-    if (update.p2 > 119) update.p2 = 119;
-    if (update.score > 120) update.score = 120;
+    if (newPos.p1 > 119) newPos.p1 = 119;
+    if (newPos.p2 > 119) newPos.p2 = 119;
+    if (newPos.score > 120) newPos.score = 120;
 
     // commit updates
     if (side === 'left') {
-      setLeftSide(update);
+      const leftUpdate = [...leftSide];
+      leftUpdate.push(newPos);
+      setLeftSide(leftUpdate);
     } else {
-      setRightSide(update);
+      const rightUpdate = [...rightSide];
+      rightUpdate.push(newPos);
+      setRightSide(rightUpdate);
     }
 
     setMovedLast(side);
   }
 
+  /**
+   * Pop off the last position so the previous position becomes
+   * the current position. 
+   * @param {String} side Which side to affect, 'left' or 'right
+   */
+  function undoMove(side) {
+    if (side === 'left' && leftSide.length > 1) {
+      const leftUpdate = [...leftSide];
+      leftUpdate.pop();
+      setLeftSide(leftUpdate);
+    } else if (rightSide.length > 1) {
+      const rightUpdate = [...rightSide];
+      rightUpdate.pop();
+      setRightSide(rightUpdate);
+    }
+  }
+
+  // get the current position off the stack
+  const leftPos = last(leftSide);
+  const rightPos = last(rightSide);
 
   return (
     <div className="App">
@@ -81,20 +101,22 @@ function App() {
           <SideButtons
             color='secondary'
             updatePegs={updatePegs}
+            undo={() => undoMove('left')}
             rotate={rotate.left}
-            score={leftSide.score}
+            score={leftPos.score}
             side='left'
           />
         </Grid>
         <Grid item>
-          <Board redPos={leftSide} bluePos={rightSide} />
+          <Board redPos={leftPos} bluePos={rightPos} />
         </Grid>
         <Grid item>
           <SideButtons
             color='primary'
             updatePegs={updatePegs}
+            undo={() => undoMove('right')}
             rotate={rotate.right}
-            score={rightSide.score}
+            score={rightPos.score}
             side='right'
           />
         </Grid>

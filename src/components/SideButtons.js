@@ -1,7 +1,6 @@
 import ArrowUp from '@mui/icons-material/KeyboardArrowUp';
-import ArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import DoubleArrowUp from '@mui/icons-material/KeyboardDoubleArrowUp';
-import DoubleArrowDown from '@mui/icons-material/KeyboardDoubleArrowDown';
+import Undo from '@mui/icons-material/Undo';
 import { Box, Grid } from '@mui/material';
 
 import Button from './CustomButton';
@@ -9,6 +8,7 @@ import Button from './CustomButton';
 export default function SideButtons(props) {
   const {
     color,
+    undo,
     updatePegs,
     rotate,
     score,
@@ -23,9 +23,21 @@ export default function SideButtons(props) {
       direction='column'
       sx={{
         padding: 2,
-        transform: rotate ? 'rotate(180deg)' : 'none'
+        transform: rotate ? 'rotate(180deg)' : 'none',
+        '& div': {
+          my: 1,
+        }
       }}
     >
+      <Grid item>
+        <Button
+          onClick={undo}
+          color={color}
+          sx={{ px: 1 }}
+        >
+          <Undo />
+        </Button>
+      </Grid>
       <Grid item>
         <Box sx={{
           color: '#dfdfdf',
@@ -55,24 +67,6 @@ export default function SideButtons(props) {
           color={color}
         >
           1
-        </Button>
-      </Grid>
-      <Grid item>
-        <Button
-          onClick={() => updatePegs(side, -1)}
-          startIcon={<ArrowDown />}
-          color={color}
-        >
-          1
-        </Button>
-      </Grid>
-      <Grid item>
-        <Button
-          onClick={() => updatePegs(side, -5)}
-          startIcon={<DoubleArrowDown />}
-          color={color}
-        >
-          5
         </Button>
       </Grid>
     </Grid>
