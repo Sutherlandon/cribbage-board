@@ -9,24 +9,24 @@ const blankSide = { score: 2, p1: 0, p2: 1 };
 
 function App() {
   const [movedLast, setMovedLast] = useState();
-  const [redSide, setRedSide] = useState(blankSide);
-  const [blueSide, setBlueSide] = useState(blankSide);
+  const [leftSide, setLeftSide] = useState(blankSide);
+  const [rightSide, setRightSide] = useState(blankSide);
   const [rotate, setRotate] = useState({ left: true, right: false });
 
   function reset() {
     if (window.confirm('Are you sure?')) {
-      setRedSide(blankSide);
-      setBlueSide(blankSide);
+      setLeftSide(blankSide);
+      setRightSide(blankSide);
     }
   }
 
   function updatePegs(side, plusValue) {
     let update;
     // get the starting state
-    if (side === 'red') {
-      update = { ...redSide };
+    if (side === 'left') {
+      update = { ...leftSide };
     } else {
-      update = { ...blueSide };
+      update = { ...rightSide };
     }
 
     // make the updates
@@ -59,10 +59,10 @@ function App() {
     if (update.score > 120) update.score = 120;
 
     // commit updates
-    if (side === 'red') {
-      setRedSide(update);
+    if (side === 'left') {
+      setLeftSide(update);
     } else {
-      setBlueSide(update);
+      setRightSide(update);
     }
 
     setMovedLast(side);
@@ -82,20 +82,20 @@ function App() {
             color='secondary'
             updatePegs={updatePegs}
             rotate={rotate.left}
-            score={redSide.score}
-            side='red'
+            score={leftSide.score}
+            side='left'
           />
         </Grid>
         <Grid item>
-          <Board redPos={redSide} bluePos={blueSide} />
+          <Board redPos={leftSide} bluePos={rightSide} />
         </Grid>
         <Grid item>
           <SideButtons
             color='primary'
             updatePegs={updatePegs}
             rotate={rotate.right}
-            score={blueSide.score}
-            side='blue'
+            score={rightSide.score}
+            side='right'
           />
         </Grid>
       </Grid>
