@@ -2,11 +2,11 @@ import { Grid, } from '@mui/material';
 import { useState } from 'react';
 import last from 'lodash.last';
 
-import Board from './components/Board';
+import Board from './components/Board2';
 import Header from './components/Header';
 import SideButtons from './components/SideButtons';
 
-const blankSide = [{ score: 2, p1: 0, p2: 1 }];
+const blankSide = [{ score: 0, p1: -2, p2: -1 }];
 
 function App() {
   const [movedLast, setMovedLast] = useState();
@@ -108,7 +108,7 @@ function App() {
           />
         </Grid>
         <Grid item>
-          <Board redPos={leftPos} bluePos={rightPos} />
+          <Board leftPos={leftPos} rightPos={rightPos} />
         </Grid>
         <Grid item>
           <SideButtons
