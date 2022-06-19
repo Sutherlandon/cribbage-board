@@ -18,9 +18,9 @@ function Row({ sx, children }) {
   );
 }
 
+// the props are just the positions of the players
+// maybe a hook would be better.
 export default function Board(props) {
-  //const { leftPos, rightPos } = props;
-
   return (
     <div id='Board' style={{ width: '100%' }}>
       <Row sx={{ marginLeft: '13px' }}>
