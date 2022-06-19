@@ -49,7 +49,7 @@ export default function Board(props) {
         <TopRight index={101} {...props} />
       </Row>
       <Row sx={{ marginLeft: '17px' }}>
-        <EndCell index={121} {...props} />
+        <EndCell index={120} {...props} />
         <StraightCells invert length={17} startIndex={103} {...props} />
         <BottomRight invert index={102} {...props} />
       </Row>

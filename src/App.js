@@ -50,9 +50,9 @@ function App() {
     }
 
     // 120 is the ceiling
-    if (newPos.p1 > 119) newPos.p1 = 119;
-    if (newPos.p2 > 119) newPos.p2 = 119;
-    if (newPos.score > 120) newPos.score = 120;
+    if (newPos.p1 > 120) newPos.p1 = 120;
+    if (newPos.p2 > 120) newPos.p2 = 120;
+    if (newPos.score > 121) newPos.score = 121;
 
     // commit updates
     if (side === 'left') {
