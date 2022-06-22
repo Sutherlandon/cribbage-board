@@ -22,7 +22,7 @@ function App() {
   const pinTimeout = useCallback(debounce(() => {
     setLeftAdvance(false);
     setRightAdvance(false);
-  }, 1500), []);
+  }, 3000), []);
 
   function reset() {
     if (window.confirm('Are you sure?')) {
