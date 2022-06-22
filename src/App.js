@@ -1,6 +1,7 @@
-import { Grid, } from '@mui/material';
-import { useState } from 'react';
 import last from 'lodash.last';
+import debounce from 'lodash.debounce';
+import { Grid } from '@mui/material';
+import { useCallback, useState } from 'react';
 
 import Board from './components/Board2';
 import Header from './components/Header';
@@ -9,10 +10,19 @@ import SideButtons from './components/SideButtons';
 const blankSide = [{ score: 0, p1: -2, p2: -1 }];
 
 function App() {
-  const [movedLast, setMovedLast] = useState();
+  const [leftAdvance, setLeftAdvance] = useState(false);
+  const [rightAdvance, setRightAdvance] = useState(false);
   const [leftSide, setLeftSide] = useState(blankSide);
   const [rightSide, setRightSide] = useState(blankSide);
   const [rotate, setRotate] = useState({ left: true, right: false });
+
+  // set's the timeout to bring the back peg forward instead of
+  // advancing the forward peg again.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const pinTimeout = useCallback(debounce(() => {
+    setLeftAdvance(false);
+    setRightAdvance(false);
+  }, 1500), []);
 
   function reset() {
     if (window.confirm('Are you sure?')) {
@@ -22,19 +32,21 @@ function App() {
   }
 
   function updatePegs(side, plusValue) {
-    let newPos;
+    let newPos, advance;
     // get the starting state
     if (side === 'left') {
       newPos = { ...last(leftSide) };
+      advance = leftAdvance;
     } else {
       newPos = { ...last(rightSide) };
+      advance = rightAdvance;
     }
 
     // make the newPoss
     newPos.score += plusValue;
 
     // repeated moves increment the forward most peg
-    if (movedLast === side) {
+    if (advance) {
       if (newPos.p1 > newPos.p2) {
         newPos.p1 += plusValue;
       } else {
@@ -59,13 +71,15 @@ function App() {
       const leftUpdate = [...leftSide];
       leftUpdate.push(newPos);
       setLeftSide(leftUpdate);
+      setLeftAdvance(true);
     } else {
       const rightUpdate = [...rightSide];
       rightUpdate.push(newPos);
       setRightSide(rightUpdate);
+      setRightAdvance(true);
     }
 
-    setMovedLast(side);
+    pinTimeout(side);
   }
 
   /**
