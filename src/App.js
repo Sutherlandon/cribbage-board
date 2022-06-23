@@ -1,18 +1,20 @@
 import last from 'lodash.last';
 import debounce from 'lodash.debounce';
-import { Grid } from '@mui/material';
+import { Box, Grid, Link } from '@mui/material';
 import { useCallback, useState } from 'react';
 
 import Board from './components/Board2';
 import Header from './components/Header';
 import SideButtons from './components/SideButtons';
+import Scoring from './components/Scoring';
 
 const blankSide = [{ score: 0, p1: -2, p2: -1 }];
 
 function App() {
+  const [showScoring, setShowScoring] = useState(true);
   const [leftAdvance, setLeftAdvance] = useState(false);
-  const [rightAdvance, setRightAdvance] = useState(false);
   const [leftSide, setLeftSide] = useState(blankSide);
+  const [rightAdvance, setRightAdvance] = useState(false);
   const [rightSide, setRightSide] = useState(blankSide);
   const [rotate, setRotate] = useState({ left: true, right: false });
 
@@ -135,6 +137,29 @@ function App() {
           />
         </Grid>
       </Grid>
+      <Grid
+        container
+        justifyContent='space-around'
+        alignItems='center'
+        spacing={2}
+        sx={{ width: 400, mx: 'auto' }}
+      >
+        <Grid item>
+          <Box sx={{ color: 'white', display: 'inline-block', mr: 1 }}>
+            Made by
+          </Box>
+          <Link
+            href='https://sutherlandon.com'
+            target='_'
+            sx={{ color: 'primary.main' }}
+          >
+            Sutherlandon
+          </Link>
+        </Grid>
+      </Grid>
+      {showScoring &&
+        <Scoring scoring={[showScoring, setShowScoring]} />
+      }
     </div>
   );
 }

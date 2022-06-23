@@ -31,8 +31,9 @@ export default function Header(props) {
       <Grid
         container
         flexWrap='nowrap'
+        alignItems='center'
         sx={{
-          width: 640,
+          width: 564,
           margin: '16px auto 0',
         }}
       >
@@ -40,7 +41,7 @@ export default function Header(props) {
           <RotateButton side='left' />
         </Grid>
         <Grid item sx={{ width: 'content' }}>
-          <Typography variant='h4'>Cribbage</Typography>
+          <Typography variant='h6'>Cribbage</Typography>
         </Grid>
         <Grid item sx={{ flexGrow: 1 }} />
         <Grid item>
