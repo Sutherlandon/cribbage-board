@@ -41,13 +41,14 @@ export default function Header(props) {
           <RotateButton side='left' />
         </Grid>
         <Grid item sx={{ width: 'content' }}>
-          <Typography variant='h6'>Cribbage</Typography>
+          <Typography variant='h5'>Cribbage</Typography>
         </Grid>
         <Grid item sx={{ flexGrow: 1 }} />
         <Grid item>
           <Button
+            color='secondary'
+            variant='outlined'
             onClick={reset}
-            variant='text'
             sx={{ mt: 1 }}
           >
               Reset

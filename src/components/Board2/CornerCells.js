@@ -6,6 +6,7 @@ export function TopRight(props) {
     invert,
     rightPos,
     leftPos,
+    skunk,
   } = props;
 
   let topColor = 'primary.main';
@@ -21,6 +22,11 @@ export function TopRight(props) {
     topPeg = [leftPos.p1, leftPos.p2].includes(index);
   }
 
+  const skunkStyles = {}
+  if (skunk) {
+    skunkStyles.borderBottomColor = 'red';
+  }
+
   return (
     <div>
       <Cell
@@ -34,6 +40,7 @@ export function TopRight(props) {
           borderTopColor: 'black',
           borderRightColor: 'black',
           backgroundPosition: 'top 8px right 8px',
+          ...skunkStyles
         }}
         hasPeg={topPeg}
       >
@@ -59,6 +66,7 @@ export function BottomRight(props) {
     invert,
     rightPos,
     leftPos,
+    skunk,
   } = props;
 
   let topColor = 'primary.main';
@@ -74,6 +82,11 @@ export function BottomRight(props) {
     botPeg = [rightPos.p1, rightPos.p2].includes(index);
   }
 
+  const skunkStyles = {}
+  if (skunk) {
+    skunkStyles.borderTopColor = 'red';
+  }
+
   return (
     <div>
       <Cell
@@ -85,6 +98,7 @@ export function BottomRight(props) {
           borderBottomColor: 'black',
           borderRightColor: 'black',
           backgroundPosition: 'bottom 8px right 8px',
+          ...skunkStyles
         }}
         hasPeg={botPeg}
       >

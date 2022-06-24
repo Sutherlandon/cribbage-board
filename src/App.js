@@ -1,17 +1,17 @@
 import last from 'lodash.last';
 import debounce from 'lodash.debounce';
-import { Box, Grid, Link } from '@mui/material';
+import { Box, Button, Grid, Link } from '@mui/material';
 import { useCallback, useState } from 'react';
 
 import Board from './components/Board2';
 import Header from './components/Header';
 import SideButtons from './components/SideButtons';
-import Scoring from './components/Scoring';
+import Menu from './components/Menu';
 
 const blankSide = [{ score: 0, p1: -2, p2: -1 }];
 
 function App() {
-  const [showScoring, setShowScoring] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [leftAdvance, setLeftAdvance] = useState(false);
   const [leftSide, setLeftSide] = useState(blankSide);
   const [rightAdvance, setRightAdvance] = useState(false);
@@ -108,10 +108,11 @@ function App() {
   return (
     <div className="App">
       <Header
+        reset={reset}
         rotate={rotate}
         setRotate={setRotate}
-        reset={reset}
       />
+      <Menu open={menuOpen} handleClose={() => setMenuOpen(false)} />
       <Grid container justifyContent='center' alignItems='center'>
         <Grid item>
           <SideButtons
@@ -139,11 +140,19 @@ function App() {
       </Grid>
       <Grid
         container
-        justifyContent='space-around'
+        justifyContent='space-between'
         alignItems='center'
-        spacing={2}
-        sx={{ width: 400, mx: 'auto' }}
+        sx={{ width: 400, mx: 'auto', mt: -2 }}
       >
+        <Grid item>
+          <Button
+            onClick={setMenuOpen}
+            variant='text'
+            sx={{ mt: 1 }}
+          >
+              Rules
+          </Button>
+        </Grid>
         <Grid item>
           <Box sx={{ color: 'white', display: 'inline-block', mr: 1 }}>
             Made by
@@ -157,9 +166,6 @@ function App() {
           </Link>
         </Grid>
       </Grid>
-      {showScoring &&
-        <Scoring scoring={[showScoring, setShowScoring]} />
-      }
     </div>
   );
 }

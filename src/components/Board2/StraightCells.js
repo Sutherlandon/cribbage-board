@@ -31,24 +31,36 @@ export default function StraightCells(props) {
       .map(value => value < 0 ? value : (startIndex - value) + (length - 1));
   }
 
+
   // we fill with 0's just to have something to map with
   return new Array(length).fill(0)
-    .map((e, index) => (
-      <div key={index}>
-        <Cell 
-          sx={{
-            backgroundColor: topColor,
-            borderTopColor: 'black',
-          }}
-          hasPeg={topPegs.includes(index)}
-        />
-        <Cell
-          sx={{
-            backgroundColor: botColor,
-            borderBottomColor: 'black'
-          }}
-          hasPeg={botPegs.includes(index)}
-        />
-      </div>
-    ));
+    .map((e, index) => {
+      const skunkStyles = {};
+      if (index + startIndex === 91) {
+        skunkStyles.borderRightColor = 'white';
+      } else if (index + startIndex === 92) {
+        skunkStyles.borderLeftColor = 'white';
+      }
+
+      return (
+        <div key={index}>
+          <Cell
+            sx={{
+              backgroundColor: topColor,
+              borderTopColor: 'black',
+              ...skunkStyles,
+            }}
+            hasPeg={topPegs.includes(index)}
+          />
+          <Cell
+            sx={{
+              backgroundColor: botColor,
+              borderBottomColor: 'black',
+              ...skunkStyles,
+            }}
+            hasPeg={botPegs.includes(index)}
+          />
+        </div>
+      );
+    });
 }

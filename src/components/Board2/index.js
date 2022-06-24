@@ -36,12 +36,12 @@ export default function Board(props) {
       <Row>
         <BottomLeft index={39} {...props} />
         <StraightCells startIndex={40} {...props} />
-        <TopRight index={59} {...props} />
+        <TopRight index={59} skunk {...props} />
       </Row>
       <Row>
         <TopLeft invert index={80} {...props} />
         <StraightCells invert startIndex={61} {...props} />
-        <BottomRight invert index={60} {...props} />
+        <BottomRight invert index={60} skunk {...props} />
       </Row>
       <Row>
         <BottomLeft index={81} {...props} />

@@ -1,14 +1,12 @@
-import { ArrowUpwardRounded, ArrowDownwardRounded } from '@mui/icons-material';
 import {
   Box,
-  Button,
-  Grid,
   Table,
   TableBody,
   TableCell,
   TableRow,
-  Typography,
-} from "@mui/material";
+} from '@mui/material';
+
+import MenuTitle from './MenuTitle';
 
 function Row({ desc, points }) {
   return (
@@ -37,8 +35,6 @@ function Row({ desc, points }) {
 }
 
 export default function Scoring(props) {
-  // const [showScoring, setShowScoring] = props.scoring;
-
   return (
     <Box sx={{
       width: 400,
@@ -46,38 +42,12 @@ export default function Scoring(props) {
       mt: 2,
       mb: 4
     }}>
-      <Grid
-        container
-        justifyContent='space-between'
-        alignItems='center'
-        sx={{
-          borderBottom: '1px solid white',
-          color: 'white',
-          mb: 1,
-        }}
-      >
-        <Grid item>
-          <Typography
-            variant='h6'
-          >
-            Scoring
-          </Typography>
-        </Grid>
-        {/* <Grid item>
-          {showScoring ? (
-            <Button onClick={() => setShowScoring(false)}>
-              Hide Scoring <ArrowUpwardRounded />
-            </Button>
-          ) : (
-            <Button onClick={() => setShowScoring(true)}>
-              Show Scoring <ArrowDownwardRounded />
-            </Button>
-          )}
-        </Grid> */}
-      </Grid>
+      <MenuTitle title='Scoring' />
       <Table>
         <TableBody>
           <Row desc='Fifteen' points='2' />
+          <Row desc='Thirty One' points='2' />
+          <Row desc='"Go" or Last Card' points='1' />
           <Row desc='Pair' points='2' />
           <Row desc='Three of a kind' points='6' />
           <Row desc='Four of a kind' points='12' />
