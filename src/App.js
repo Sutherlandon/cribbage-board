@@ -74,10 +74,12 @@ function App() {
       leftUpdate.push(newPos);
       setLeftSide(leftUpdate);
       setLeftAdvance(true);
+      setRightAdvance(false);
     } else {
       const rightUpdate = [...rightSide];
       rightUpdate.push(newPos);
       setRightSide(rightUpdate);
+      setLeftAdvance(false);
       setRightAdvance(true);
     }
 
