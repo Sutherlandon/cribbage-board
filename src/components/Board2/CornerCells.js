@@ -24,7 +24,7 @@ export function TopRight(props) {
 
   const skunkStyles = {}
   if (skunk) {
-    skunkStyles.borderBottomColor = 'red';
+    skunkStyles.borderBottomColor = 'skunk2.main';
   }
 
   return (
@@ -84,7 +84,7 @@ export function BottomRight(props) {
 
   const skunkStyles = {}
   if (skunk) {
-    skunkStyles.borderTopColor = 'red';
+    skunkStyles.borderTopColor = 'skunk2.main';
   }
 
   return (

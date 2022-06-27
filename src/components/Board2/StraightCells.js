@@ -37,9 +37,9 @@ export default function StraightCells(props) {
     .map((e, index) => {
       const skunkStyles = {};
       if (index + startIndex === 91) {
-        skunkStyles.borderRightColor = 'white';
+        skunkStyles.borderRightColor = 'skunk.main';
       } else if (index + startIndex === 92) {
-        skunkStyles.borderLeftColor = 'white';
+        skunkStyles.borderLeftColor = 'skunk.main';
       }
 
       return (

@@ -1,12 +1,15 @@
 import last from 'lodash.last';
 import debounce from 'lodash.debounce';
+import { ThemeProvider } from '@mui/system';
 import { Box, Button, Grid, Link } from '@mui/material';
 import { useCallback, useState } from 'react';
+
 
 import Board from './components/Board2';
 import Header from './components/Header';
 import SideButtons from './components/SideButtons';
 import Menu from './components/Menu';
+import * as themes from './theme';
 
 const blankSide = [{ score: 0, p1: -2, p2: -1 }];
 
@@ -17,6 +20,7 @@ function App() {
   const [rightAdvance, setRightAdvance] = useState(false);
   const [rightSide, setRightSide] = useState(blankSide);
   const [rotate, setRotate] = useState({ left: true, right: false });
+  const [theme, setTheme] = useState('topper');
 
   // set's the timeout to bring the back peg forward instead of
   // advancing the forward peg again.
@@ -79,8 +83,8 @@ function App() {
       const rightUpdate = [...rightSide];
       rightUpdate.push(newPos);
       setRightSide(rightUpdate);
-      setLeftAdvance(false);
       setRightAdvance(true);
+      setLeftAdvance(false);
     }
 
     pinTimeout(side);
@@ -108,67 +112,81 @@ function App() {
   const rightPos = last(rightSide);
 
   return (
-    <div className="App">
-      <Header
-        reset={reset}
-        rotate={rotate}
-        setRotate={setRotate}
-      />
-      <Menu open={menuOpen} handleClose={() => setMenuOpen(false)} />
-      <Grid container justifyContent='center' alignItems='center'>
-        <Grid item>
-          <SideButtons
-            color='secondary'
-            updatePegs={updatePegs}
-            undo={() => undoMove('left')}
-            rotate={rotate.left}
-            score={leftPos.score}
-            side='left'
-          />
+    <ThemeProvider theme={themes[theme]}>
+      <Box sx={{
+        backgroundColor: 'background.main',
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        right: 0,
+        bottom: 0,
+      }}>
+        <Header
+          reset={reset}
+          rotate={rotate}
+          setRotate={setRotate}
+        />
+        <Menu
+          open={menuOpen}
+          handleClose={() => setMenuOpen(false)}
+          currentTheme={theme}
+          setTheme={setTheme}
+        />
+        <Grid container justifyContent='center' alignItems='center'>
+          <Grid item>
+            <SideButtons
+              color='secondary'
+              updatePegs={updatePegs}
+              undo={() => undoMove('left')}
+              rotate={rotate.left}
+              score={leftPos.score}
+              side='left'
+            />
+          </Grid>
+          <Grid item>
+            <Board leftPos={leftPos} rightPos={rightPos} />
+          </Grid>
+          <Grid item>
+            <SideButtons
+              color='primary'
+              updatePegs={updatePegs}
+              undo={() => undoMove('right')}
+              rotate={rotate.right}
+              score={rightPos.score}
+              side='right'
+            />
+          </Grid>
         </Grid>
-        <Grid item>
-          <Board leftPos={leftPos} rightPos={rightPos} />
+        <Grid
+          container
+          justifyContent='space-between'
+          alignItems='center'
+          sx={{ width: 400, mx: 'auto', mt: -2 }}
+        >
+          <Grid item>
+            <Button
+              onClick={setMenuOpen}
+              variant='text'
+              sx={{ mt: 1 }}
+            >
+              Rules & Settings
+            </Button>
+          </Grid>
+          <Grid item>
+            <Box sx={{ color: 'white', display: 'inline-block', mr: 1 }}>
+              Made by
+            </Box>
+            <Link
+              href='https://sutherlandon.com'
+              target='_'
+              sx={{ color: 'primary.main' }}
+            >
+              Sutherlandon
+            </Link>
+          </Grid>
         </Grid>
-        <Grid item>
-          <SideButtons
-            color='primary'
-            updatePegs={updatePegs}
-            undo={() => undoMove('right')}
-            rotate={rotate.right}
-            score={rightPos.score}
-            side='right'
-          />
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        justifyContent='space-between'
-        alignItems='center'
-        sx={{ width: 400, mx: 'auto', mt: -2 }}
-      >
-        <Grid item>
-          <Button
-            onClick={setMenuOpen}
-            variant='text'
-            sx={{ mt: 1 }}
-          >
-              Rules
-          </Button>
-        </Grid>
-        <Grid item>
-          <Box sx={{ color: 'white', display: 'inline-block', mr: 1 }}>
-            Made by
-          </Box>
-          <Link
-            href='https://sutherlandon.com'
-            target='_'
-            sx={{ color: 'primary.main' }}
-          >
-            Sutherlandon
-          </Link>
-        </Grid>
-      </Grid>
-    </div>
+      </Box>
+    </ThemeProvider>
   );
 }
 
