@@ -16,11 +16,11 @@ export default function Header(props) {
         flexWrap='nowrap'
         alignItems='center'
         sx={{
-          width: 387,
+          width: 400,
           margin: '16px auto 0',
         }}
       >
-        <Grid item sx={{ width: 'content', ml: -1 }}>
+        <Grid item sx={{ width: 'content' }}>
           <Button
             sx={{ color: 'white', textTransform: 'none' }}
             onClick={() => setMenuOpen(true)}
