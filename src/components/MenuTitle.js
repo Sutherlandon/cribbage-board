@@ -6,7 +6,7 @@ export default function MenuTitle({ title }) {
       sx={{
         borderBottom: '1px solid white',
         color: 'white',
-        mb: 1,
+        mb: 2,
       }}
     >
       <Typography variant='h6'>

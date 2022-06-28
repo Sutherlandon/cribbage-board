@@ -1,7 +1,7 @@
 import last from 'lodash.last';
 import debounce from 'lodash.debounce';
 import { ThemeProvider } from '@mui/system';
-import { Box, Button, Grid, Link } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { useCallback, useState } from 'react';
 
 
@@ -10,6 +10,7 @@ import Header from './components/Header';
 import SideButtons from './components/SideButtons';
 import Menu from './components/Menu';
 import * as themes from './theme';
+import Footer from './components/Footer';
 
 const blankSide = [{ score: 0, p1: -2, p2: -1 }];
 
@@ -125,66 +126,42 @@ function App() {
           reset={reset}
           rotate={rotate}
           setRotate={setRotate}
+          setMenuOpen={setMenuOpen}
         />
         <Menu
           open={menuOpen}
           handleClose={() => setMenuOpen(false)}
           currentTheme={theme}
           setTheme={setTheme}
+          orientation={rotate}
+          setOrientation={setRotate}
         />
         <Grid container justifyContent='center' alignItems='center'>
-          <Grid item>
-            <SideButtons
-              color='secondary'
-              updatePegs={updatePegs}
-              undo={() => undoMove('left')}
-              rotate={rotate.left}
-              score={leftPos.score}
-              side='left'
-            />
-          </Grid>
-          <Grid item>
-            <Board leftPos={leftPos} rightPos={rightPos} />
-          </Grid>
           <Grid item>
             <SideButtons
               color='primary'
               updatePegs={updatePegs}
               undo={() => undoMove('right')}
-              rotate={rotate.right}
+              rotate={rotate.left}
               score={rightPos.score}
               side='right'
             />
           </Grid>
-        </Grid>
-        <Grid
-          container
-          justifyContent='space-between'
-          alignItems='center'
-          sx={{ width: 400, mx: 'auto', mt: -2 }}
-        >
-          <Grid item>
-            <Button
-              onClick={() => setMenuOpen(true)}
-              variant='text'
-              sx={{ mt: 1 }}
-            >
-              Rules & Settings
-            </Button>
+          <Grid item sx={{ mx: 2 }}>
+            <Board leftPos={leftPos} rightPos={rightPos} />
           </Grid>
           <Grid item>
-            <Box sx={{ color: 'white', display: 'inline-block', mr: 1 }}>
-              Made by
-            </Box>
-            <Link
-              href='https://sutherlandon.com'
-              target='_'
-              sx={{ color: 'primary.main' }}
-            >
-              Sutherlandon
-            </Link>
+            <SideButtons
+              color='secondary'
+              updatePegs={updatePegs}
+              undo={() => undoMove('left')}
+              rotate={rotate.right}
+              score={leftPos.score}
+              side='left'
+            />
           </Grid>
         </Grid>
+        <Footer />
       </Box>
     </ThemeProvider>
   );

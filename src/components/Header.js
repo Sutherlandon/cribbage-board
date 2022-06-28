@@ -1,30 +1,13 @@
-import Cached from '@mui/icons-material/Cached';
+import { Cached, Menu } from '@mui/icons-material';
 import {
   Box,
   Button,
   Grid,
-  IconButton,
   Typography
 } from '@mui/material';
 
 export default function Header(props) {
-  const { reset, rotate, setRotate } = props;
-
-  function RotateButton({ side }) {
-    const sx = {
-      left: { ml: '13px', mr: '38px', mt: '6px' },
-      right: { ml: '28px', mr: '13px', mt: '6px' },
-    }
-    return (
-      <IconButton
-        color='primary'
-        onClick={() => setRotate({ ...rotate, [side]: !rotate[side] })}
-        sx={sx[side]}
-      >
-        <Cached />
-      </IconButton>
-    );
-  }
+  const { setMenuOpen, reset } = props;
 
   return (
     <Box sx={{ color: '#dfdfdf' }}>
@@ -33,29 +16,32 @@ export default function Header(props) {
         flexWrap='nowrap'
         alignItems='center'
         sx={{
-          width: 564,
+          width: 387,
           margin: '16px auto 0',
         }}
       >
-        <Grid item>
-          <RotateButton side='left' />
-        </Grid>
-        <Grid item sx={{ width: 'content' }}>
-          <Typography variant='h5'>Cribbage</Typography>
+        <Grid item sx={{ width: 'content', ml: -1 }}>
+          <Button
+            sx={{ color: 'white', textTransform: 'none' }}
+            onClick={() => setMenuOpen(true)}
+          >
+            <Typography variant='h5' color='text.main'>
+              <Menu sx={{
+                verticalAlign: 'text-top',
+                fontSize: '1.75rem'
+              }} /> Cribbage
+            </Typography>
+          </Button>
         </Grid>
         <Grid item sx={{ flexGrow: 1 }} />
         <Grid item>
           <Button
             color='secondary'
-            variant='outlined'
             onClick={reset}
-            sx={{ mt: 1 }}
+            startIcon={<Cached />}
           >
-              Reset
+            Reset
           </Button>
-        </Grid>
-        <Grid item>
-          <RotateButton side='right' />
         </Grid>
       </Grid>
     </Box>

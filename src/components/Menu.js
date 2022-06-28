@@ -4,6 +4,7 @@ import {
   Box,
   Dialog,
   DialogContent,
+  FormGroup,
   FormControl,
   FormControlLabel,
   Grid,
@@ -11,6 +12,7 @@ import {
   Link,
   Radio,
   RadioGroup,
+  Switch,
   Toolbar,
   Typography,
 } from '@mui/material';
@@ -19,12 +21,23 @@ import MenuTitle from './MenuTitle';
 import Scoring from './Scoring';
 import * as themes from '../theme';
 
+function MenuSection(props) {
+  return (
+    <Box sx={{ mb: 2 }}>
+      <MenuTitle title={props.title} />
+      {props.children}
+    </Box>
+  );
+}
+
 export default function Menu(props) {
   const {
     open,
     handleClose,
     currentTheme,
     setTheme,
+    orientation,
+    setOrientation,
   } = props;
 
   return (
@@ -44,18 +57,17 @@ export default function Menu(props) {
             <Close />
           </IconButton>
           <Typography sx={{ ml: 2, flex: 1 }} variant='h6' component='div'>
-            Rules & Settings
+            Cribbage Settings & Rules
           </Typography>
         </Toolbar>
       </AppBar>
       <DialogContent sx={{ backgroundColor: 'background.main' }}>
         <Box sx={{ width: 400, mx: 'auto' }}>
-          <Box sx={{ mb: 2 }}>
-            <MenuTitle title='Theme' />
-            <FormControl sx={{ paddingTop: 1 }}>
+          <MenuSection title='Theme'>
+            <FormControl>
               <RadioGroup
-                defaultValue={currentTheme}
                 row
+                defaultValue={currentTheme}
                 name='theme-radio-buttons-group'
               >
                 {Object.keys(themes).map((themeName) => {
@@ -73,12 +85,12 @@ export default function Menu(props) {
                             display: 'inline',
                             color: themes[themeName].palette.primary.main,
                           }}>
-                            <Square/>
+                            <Square />
                           </Grid>
                           <Grid item sx={{
                             color: themes[themeName].palette.secondary.main,
                           }}>
-                            <Square/>
+                            <Square />
                           </Grid>
                         </Grid>
                       }
@@ -92,13 +104,48 @@ export default function Menu(props) {
                 })}
               </RadioGroup>
             </FormControl>
-          </Box>
-          <Box sx={{ mb: 2 }}>
-            <MenuTitle title='Rules of Play' />
+          </MenuSection>
+          <MenuSection title='Control Orientations'>
+            <FormGroup row>
+              <FormControlLabel
+                label='Flip'
+                labelPlacement='start'
+                sx={{ color: 'primary.main' }}
+                control={
+                  <Switch
+                    defaultChecked={orientation.left}
+                    onClick={
+                      () => setOrientation({
+                        left: !orientation.left,
+                        right: orientation.right
+                      })
+                    }
+                  />}
+              />
+              <FormControlLabel
+                label='Flip'
+                labelPlacement='start'
+                sx={{ color: 'secondary.main' }}
+                control={
+                  <Switch
+                    defaultChecked={orientation.right}
+                    color='secondary'
+                    onClick={
+                      () => setOrientation({
+                        left: orientation.left,
+                        right: !orientation.right
+                      })
+                    }
+                  />
+                }
+              />
+            </FormGroup>
+          </MenuSection>
+          <MenuSection title='Rules of Play'>
             <Link href='https://bicyclecards.com/how-to-play/cribbage/'>
               https://bicyclecards.com/how-to-play/cribbage/
             </Link>
-          </Box>
+          </MenuSection>
           <Scoring />
         </Box>
       </DialogContent>

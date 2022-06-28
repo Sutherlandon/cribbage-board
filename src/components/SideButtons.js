@@ -1,9 +1,7 @@
 import ArrowUp from '@mui/icons-material/KeyboardArrowUp';
 import DoubleArrowUp from '@mui/icons-material/KeyboardDoubleArrowUp';
 import Undo from '@mui/icons-material/Undo';
-import { Box, Grid } from '@mui/material';
-
-import Button from './CustomButton';
+import { Button, Box, Grid } from '@mui/material';
 
 export default function SideButtons(props) {
   const {
@@ -34,14 +32,16 @@ export default function SideButtons(props) {
           onClick={undo}
           color={color}
           sx={{ px: 1 }}
+          variant='contained'
         >
           <Undo />
         </Button>
       </Grid>
       <Grid item>
         <Box sx={{
-          color: '#dfdfdf',
-          border: '1px solid #dfdfdf',
+          color: 'text.main',
+          border: '1px solid',
+          borderColor: 'text.main',
           borderRadius: 1,
           my: 1,
           padding: '0 4px 2px 4px',
@@ -56,6 +56,7 @@ export default function SideButtons(props) {
           onClick={() => updatePegs(side, 5)}
           startIcon={<DoubleArrowUp />}
           color={color}
+          variant='contained'
         >
           5
         </Button>
@@ -65,6 +66,7 @@ export default function SideButtons(props) {
           onClick={() => updatePegs(side, 1)}
           startIcon={<ArrowUp />}
           color={color}
+          variant='contained'
         >
           1
         </Button>
