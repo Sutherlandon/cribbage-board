@@ -9,15 +9,15 @@ export function TopRight(props) {
     skunk,
   } = props;
 
-  let topColor = 'primary.main';
-  let botColor = 'secondary.main';
+  let topColor = 'primary';
+  let botColor = 'secondary';
   let topPeg = [rightPos.p1, rightPos.p2].includes(index);
   let botPeg = [leftPos.p1, leftPos.p2].includes(index);
 
   // invert the colors and peg calcualtions
   if (invert) {
-    topColor = 'secondary.main';
-    botColor = 'primary.main';
+    topColor = 'secondary';
+    botColor = 'primary';
     botPeg = [rightPos.p1, rightPos.p2].includes(index);
     topPeg = [leftPos.p1, leftPos.p2].includes(index);
   }
@@ -30,30 +30,30 @@ export function TopRight(props) {
   return (
     <div>
       <Cell
+        color={topColor}
+        hasPeg={topPeg}
         sx={{
           height: '32px',
           width: '30px',
           borderTopRightRadius: '30px',
           display: 'flex',
           alignItems: 'flex-end',
-          backgroundColor: topColor,
           borderTopColor: 'black',
           borderRightColor: 'black',
           backgroundPosition: 'top 8px right 8px',
           ...skunkStyles
         }}
-        hasPeg={topPeg}
       >
         <Cell
+          color={botColor}
+          hasPeg={botPeg}
           sx={{
             borderTopRightRadius: '30px',
             borderWidth: '2px',
             borderLeft: 0,
             borderBottom: 0,
-            backgroundColor: botColor,
             backgroundPosition: 'top 3px right 3px',
           }}
-          hasPeg={botPeg}
         />
       </Cell>
     </div>
@@ -69,15 +69,15 @@ export function BottomRight(props) {
     skunk,
   } = props;
 
-  let topColor = 'primary.main';
-  let botColor = 'secondary.main';
+  let topColor = 'primary';
+  let botColor = 'secondary';
   let topPeg = [rightPos.p1, rightPos.p2].includes(index);
   let botPeg = [leftPos.p1, leftPos.p2].includes(index);
 
   // invert the colors and peg calcualtions
   if (invert) {
-    topColor = 'secondary.main';
-    botColor = 'primary.main';
+    topColor = 'secondary';
+    botColor = 'primary';
     topPeg = [leftPos.p1, leftPos.p2].includes(index);
     botPeg = [rightPos.p1, rightPos.p2].includes(index);
   }
@@ -90,28 +90,28 @@ export function BottomRight(props) {
   return (
     <div>
       <Cell
+        color={botColor}
+        hasPeg={botPeg}
         sx={{
           height: '32px',
           width: '30px',
           borderBottomRightRadius: '30px',
-          backgroundColor: botColor,
           borderBottomColor: 'black',
           borderRightColor: 'black',
           backgroundPosition: 'bottom 8px right 8px',
           ...skunkStyles
         }}
-        hasPeg={botPeg}
       >
         <Cell
+          color={topColor}
+          hasPeg={topPeg}
           sx={{
             borderBottomRightRadius: '30px',
             borderWidth: '2px',
             borderLeft: 0,
             borderTop: 0,
-            backgroundColor: topColor,
             backgroundPosition: 'bottom 3px right 3px',
           }}
-          hasPeg={topPeg}
         />
       </Cell>
     </div>
@@ -126,15 +126,15 @@ export function TopLeft(props) {
     leftPos,
   } = props;
 
-  let topColor = 'secondary.main';
-  let botColor = 'primary.main';
+  let topColor = 'secondary';
+  let botColor = 'primary';
   let topPeg = [rightPos.p1, rightPos.p2].includes(index);
   let botPeg = [leftPos.p1, leftPos.p2].includes(index);
 
   // invert the colors and peg calcualtions
   if (invert) {
-    topColor = 'primary.main';
-    botColor = 'secondary.main';
+    topColor = 'primary';
+    botColor = 'secondary';
     topPeg = [leftPos.p1, leftPos.p2].includes(index);
     botPeg = [rightPos.p1, rightPos.p2].includes(index);
   }
@@ -142,6 +142,8 @@ export function TopLeft(props) {
   return (
     <div>
       <Cell
+        color={botColor}
+        hasPeg={topPeg}
         sx={{
           height: '32px',
           width: '30px',
@@ -149,23 +151,21 @@ export function TopLeft(props) {
           display: 'flex',
           alignItems: 'flex-end',
           justifyContent: 'flex-end',
-          backgroundColor: botColor,
           borderTopColor: 'black',
           borderLeftColor: 'black',
           backgroundPosition: 'top 8px left 8px',
         }}
-        hasPeg={topPeg}
       >
         <Cell
+          color={topColor}
+          hasPeg={botPeg}
           sx={{
             borderTopLeftRadius: '30px',
             borderWidth: '2px',
             borderRight: 0,
             borderBottom: 0,
-            backgroundColor: topColor,
             backgroundPosition: 'top 3px left 3px',
           }}
-          hasPeg={botPeg}
         />
       </Cell>
     </div>
@@ -180,15 +180,15 @@ export function BottomLeft(props) {
     leftPos,
   } = props;
 
-  let topColor = 'primary.main';
-  let botColor = 'secondary.main';
+  let topColor = 'primary';
+  let botColor = 'secondary';
   let topPeg = [rightPos.p1, rightPos.p2].includes(index);
   let botPeg = [leftPos.p1, leftPos.p2].includes(index);
 
   // invert the colors and peg calcualtions
   if (invert) {
-    topColor = 'secondary.main';
-    botColor = 'primary.main';
+    topColor = 'secondary';
+    botColor = 'primary';
     topPeg = [leftPos.p1, leftPos.p2].includes(index);
     botPeg = [rightPos.p1, rightPos.p2].includes(index);
   }
@@ -196,29 +196,29 @@ export function BottomLeft(props) {
   return (
     <div>
       <Cell
+        color={botColor}
+        hasPeg={botPeg}
         sx={{
           height: '32px',
           width: '30px',
           borderBottomLeftRadius: '30px',
           display: 'flex',
           justifyContent: 'flex-end',
-          backgroundColor: botColor,
           borderBottomColor: 'black',
           borderLeftColor: 'black',
           backgroundPosition: 'bottom 8px left 8px',
         }}
-        hasPeg={botPeg}
       >
         <Cell
+          color={topColor}
+          hasPeg={topPeg}
           sx={{
             borderBottomLeftRadius: '30px',
             borderWidth: '2px',
             borderRight: 0,
             borderTop: 0,
-            backgroundColor: topColor,
             backgroundPosition: 'bottom 3px left 3px',
           }}
-          hasPeg={topPeg}
         />
       </Cell>
     </div>

@@ -12,8 +12,8 @@ export default function StraightCells(props) {
     leftPos,
   } = props;
 
-  let topColor = 'primary.main';
-  let botColor = 'secondary.main';
+  let topColor = 'primary';
+  let botColor = 'secondary';
 
   let topPegs = [rightPos.p1, rightPos.p2]
     .map(value => value < 0 ? value : value - startIndex);
@@ -22,8 +22,8 @@ export default function StraightCells(props) {
 
   // flip top and bottom cells and start counting from the end of the array
   if (invert) {
-    topColor = 'secondary.main';
-    botColor = 'primary.main';
+    topColor = 'secondary';
+    botColor = 'primary';
 
     topPegs = [leftPos.p1, leftPos.p2]
       .map(value => value < 0 ? value : (startIndex - value) + (length - 1));
@@ -45,20 +45,20 @@ export default function StraightCells(props) {
       return (
         <div key={index}>
           <Cell
+            color={topColor}
+            hasPeg={topPegs.includes(index)}
             sx={{
-              backgroundColor: topColor,
               borderTopColor: 'black',
               ...skunkStyles,
             }}
-            hasPeg={topPegs.includes(index)}
           />
           <Cell
+            color={botColor}
+            hasPeg={botPegs.includes(index)}
             sx={{
-              backgroundColor: botColor,
               borderBottomColor: 'black',
               ...skunkStyles,
             }}
-            hasPeg={botPegs.includes(index)}
           />
         </div>
       );

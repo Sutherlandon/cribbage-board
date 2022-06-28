@@ -61,10 +61,14 @@ export default function Menu(props) {
                 {Object.keys(themes).map((themeName) => {
                   return (
                     <FormControlLabel
+                      key={themeName}
                       value={themeName}
                       control={<Radio />}
                       label={
                         <Grid container sx={{ marginTop: '4px' }}>
+                          <Grid item sx={{ mr: 1, color: 'white' }}>
+                            {themeName}
+                          </Grid>
                           <Grid item sx={{
                             display: 'inline',
                             color: themes[themeName].palette.primary.main,

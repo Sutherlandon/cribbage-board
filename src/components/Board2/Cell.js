@@ -1,20 +1,31 @@
+import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
-import dotImage from '../../images/dot.png';
 
 export default function Cell(props) {
+  const {
+    children,
+    color,
+    hasPeg,
+    sx,
+  } = props;
+
+  const theme = useTheme();
+  const dotImage = theme.pegs[color];
+
   return (
     <Box sx={{
       height: '15px',
       width: '15px',
       border: '1px solid',
       borderColor: 'border.main',
+      backgroundColor: `${color}.background`,
       backgroundSize: '12px 12px',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
-      backgroundImage: props.hasPeg && `url(${dotImage})`,
-      ...props.sx,
+      backgroundImage: hasPeg && `url(${dotImage})`,
+      ...sx,
     }}>
-      {props.children}
+      {children}
     </Box>
   );
 }

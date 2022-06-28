@@ -9,7 +9,7 @@ export default function EndCell(props) {
   } = props;
 
   // default mixed
-  let hasPeg = false;
+  let hasPeg;
   let borderColors = {
     borderTopColor: 'secondary.main',
     borderRightColor: 'secondary.main',
@@ -19,13 +19,13 @@ export default function EndCell(props) {
 
   // right wins, all primary
   if ([rightPos.p1, rightPos.p2].includes(index)) {
-    hasPeg = true;
+    hasPeg = 'primary';
     borderColors = { borderColor: 'primary.main' };
   }
 
   // left wins, all secondary
   if ([leftPos.p1, leftPos.p2].includes(index)) {
-    hasPeg = true;
+    hasPeg = 'secondary';
     borderColors = { borderColor: 'secondary.main' };
   }
 
@@ -33,17 +33,21 @@ export default function EndCell(props) {
     <Box sx={{
       display: 'flex',
       alignItems: 'center',
-      marginLeft: '17px',
+      marginLeft: '16px',
     }}>
       <Cell
+        color={hasPeg}
+        hasPeg={Boolean(hasPeg)}
         sx={{
+          backgroundColor: 'inherit',
+          borderWidth: '2px',
           borderRadius: '30px',
+          ...borderColors,
+          height: '16px',
           marginRight: '8px',
           marginLeft: '5px',
-          borderWidth: '2px',
-          ...borderColors,
+          width: '16px',
         }}
-        hasPeg={hasPeg}
       />
     </Box>
   );

@@ -20,7 +20,7 @@ function App() {
   const [rightAdvance, setRightAdvance] = useState(false);
   const [rightSide, setRightSide] = useState(blankSide);
   const [rotate, setRotate] = useState({ left: true, right: false });
-  const [theme, setTheme] = useState('topper');
+  const [theme, setTheme] = useState(Object.keys(themes)[0]);
 
   // set's the timeout to bring the back peg forward instead of
   // advancing the forward peg again.
@@ -165,7 +165,7 @@ function App() {
         >
           <Grid item>
             <Button
-              onClick={setMenuOpen}
+              onClick={() => setMenuOpen(true)}
               variant='text'
               sx={{ mt: 1 }}
             >
