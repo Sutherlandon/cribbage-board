@@ -47,7 +47,10 @@ export default function Menu(props) {
       fullScreen
     >
       <AppBar sx={{ position: 'relative' }}>
-        <Toolbar>
+        <Toolbar sx={{ width: 400, mx: 'auto' }}>
+          <Typography sx={{ flex: 1 }} variant='h6' component='div'>
+            Cribbage Settings & Rules
+          </Typography>
           <IconButton
             edge='start'
             color='inherit'
@@ -56,9 +59,6 @@ export default function Menu(props) {
           >
             <Close />
           </IconButton>
-          <Typography sx={{ ml: 2, flex: 1 }} variant='h6' component='div'>
-            Cribbage Settings & Rules
-          </Typography>
         </Toolbar>
       </AppBar>
       <DialogContent sx={{ backgroundColor: 'background.main' }}>
@@ -142,7 +142,7 @@ export default function Menu(props) {
             </FormGroup>
           </MenuSection>
           <MenuSection title='Rules of Play'>
-            <Link href='https://bicyclecards.com/how-to-play/cribbage/'>
+            <Link href='https://bicyclecards.com/how-to-play/cribbage/' target='_blank' rel='noopener'>
               https://bicyclecards.com/how-to-play/cribbage/
             </Link>
           </MenuSection>
