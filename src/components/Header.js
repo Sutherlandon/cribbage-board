@@ -39,6 +39,7 @@ export default function Header(props) {
             color='secondary'
             onClick={reset}
             startIcon={<Cached />}
+            variant='outlined'
           >
             Reset
           </Button>

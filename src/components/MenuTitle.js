@@ -5,7 +5,7 @@ export default function MenuTitle({ title }) {
     <Box
       sx={{
         borderBottom: '1px solid white',
-        color: 'white',
+        color: 'text.main',
         mb: 2,
       }}
     >

@@ -3,103 +3,107 @@ import { createTheme } from "@mui/material";
 import peg_black from './images/peg_black.svg';
 import peg_topper_primary from './images/peg_topper_primary.svg';
 import peg_topper_secondary from './images/peg_topper_secondary.svg';
-import peg_red from './images/peg_red.svg';
-import peg_blue from './images/peg_blue.svg';
+import peg_seafoam_primary from './images/peg_seafoam_primary.svg';
+import peg_seafoam_secondary from './images/peg_seafoam_secondary.svg';
 
 // board is colored and pegs are black
-export const Board1 = createTheme({
-  palette: {
-    primary: {
-      main: '#e4de07',
-      background: '#e4de07',
+const themes = {
+  // board is neutral and pegs are colored
+  'Dark Pegs': createTheme({
+    palette: {
+      primary: {
+        main: '#e4de07',
+        background: '#5a5a5a',
+      },
+      secondary: {
+        main: '#86e080',
+        background: '#5a5a5a',
+      },
+      background: { main: '#2a2a2a' },
+      border: { main: '#404040' },
+      skunk: { main: '#07e4dd' },
+      skunk2: { main: '#07e4dd' },
+      text: {
+        main: 'white',
+      }
     },
-    secondary: {
-      main: '#86e080',
-      background: '#86e080',
-    },
-    background: { main: '#2a2a2a' },
-    border: { main: '#828282' },
-    skunk: { main: 'red' },
-    skunk2: { main: 'red' },
-    text: {
-      main: 'white',
+    pegs: {
+      primary: peg_topper_primary,
+      secondary: peg_topper_secondary,
     }
-  },
-  pegs: {
-    primary: peg_black,
-    secondary: peg_black,
-  }
-});
+  }),
 
-// board is neutral and pegs are colored
-export const Pegs1 = createTheme({
-  palette: {
-    primary: {
-      main: '#e4de07',
-      background: '#5a5a5a',
+  'Dark Board': createTheme({
+    palette: {
+      primary: {
+        main: '#e4de07',
+        background: '#e4de07',
+      },
+      secondary: {
+        main: '#86e080',
+        background: '#86e080',
+      },
+      background: { main: '#2a2a2a' },
+      border: { main: '#828282' },
+      skunk: { main: 'red' },
+      skunk2: { main: 'red' },
+      text: {
+        main: 'white',
+      }
     },
-    secondary: {
-      main: '#86e080',
-      background: '#5a5a5a',
-    },
-    background: { main: '#2a2a2a' },
-    border: { main: '#404040' },
-    skunk: { main: '#07e4dd' },
-    skunk2: { main: '#07e4dd' },
-    text: {
-      main: 'white',
+    pegs: {
+      primary: peg_black,
+      secondary: peg_black,
     }
-  },
-  pegs: {
-    primary: peg_topper_primary,
-    secondary: peg_topper_secondary,
-  }
-});
+  }),
 
-export const Board2 = createTheme({
-  palette: {
-    primary: {
-      main: '#ff3600',
-      background: '#ff3600',
+  'Light Pegs': createTheme({
+    palette: {
+      primary: {
+        main: '#00ff00',
+        background: '#bababa',
+      },
+      secondary: {
+        main: '#00d0ff',
+        background: '#dadada',
+      },
+      background: { main: '#f9f9f9' },
+      border: { main: '#707070' },
+      skunk: { main: 'red' },
+      skunk2: { main: 'red' },
+      text: {
+        main: 'black',
+      }
     },
-    secondary: {
-      main: '#00d0ff',
-      background: '#00d0ff',
-    },
-    background: { main: '#2a2a2a' },
-    border: { main: '#828282' },
-    skunk: { main: 'white' },
-    skunk2: { main: 'white' },
-    text: {
-      main: 'white',
+    pegs: {
+      primary: peg_seafoam_primary,
+      secondary: peg_seafoam_secondary,
     }
-  },
-  pegs: {
-    primary: peg_black,
-    secondary: peg_black,
-  }
-});
+  }),
 
-export const Pegs2 = createTheme({
-  palette: {
-    primary: {
-      main: '#ff3600',
-      background: '#5a5a5a',
+  'Light Board': createTheme({
+    palette: {
+      primary: {
+        main: '#00ff00',
+        background: '#00ff00',
+      },
+      secondary: {
+        main: '#00d0ff',
+        background: '#00d0ff',
+      },
+      background: { main: '#f9f9f9' },
+      border: { main: '#616161' },
+      skunk: { main: 'red' },
+      skunk2: { main: 'red' },
+      text: {
+        main: 'black',
+      }
     },
-    secondary: {
-      main: '#00d0ff',
-      background: '#5a5a5a',
-    },
-    background: { main: '#2a2a2a' },
-    border: { main: '#404040' },
-    skunk: { main: 'white' },
-    skunk2: { main: 'white' },
-    text: {
-      main: 'white',
+    pegs: {
+      primary: peg_black,
+      secondary: peg_black,
     }
-  },
-  pegs: {
-    primary: peg_red,
-    secondary: peg_blue,
-  }
-});
+  }),
+}
+
+export default themes

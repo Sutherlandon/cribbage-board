@@ -14,7 +14,7 @@ function Row({ desc, points }) {
       <TableCell
         sx={{
           border: 'none',
-          color: 'primary.main',
+          color: 'text.main',
           padding: 0,
         }}
       >
@@ -23,7 +23,7 @@ function Row({ desc, points }) {
       <TableCell
         sx={{
           border: 'none',
-          color: 'primary.main',
+          color: 'text.main',
           padding: 0,
           textAlign: 'end'
         }}
@@ -40,7 +40,7 @@ export default function Scoring(props) {
       width: 400,
       margin: 'auto',
       mt: 2,
-      mb: 4
+      mb: 4,
     }}>
       <MenuTitle title='Scoring' />
       <Table>

@@ -19,7 +19,7 @@ import {
 
 import MenuTitle from './MenuTitle';
 import Scoring from './Scoring';
-import * as themes from '../theme';
+import themes from '../theme';
 
 function MenuSection(props) {
   return (
@@ -66,7 +66,6 @@ export default function Menu(props) {
           <MenuSection title='Theme'>
             <FormControl>
               <RadioGroup
-                row
                 defaultValue={currentTheme}
                 name='theme-radio-buttons-group'
               >
@@ -78,7 +77,7 @@ export default function Menu(props) {
                       control={<Radio />}
                       label={
                         <Grid container sx={{ marginTop: '4px' }}>
-                          <Grid item sx={{ mr: 1, color: 'white' }}>
+                          <Grid item sx={{ mr: 1, color: 'text.main' }}>
                             {themeName}
                           </Grid>
                           <Grid item sx={{

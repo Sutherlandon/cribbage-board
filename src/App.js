@@ -9,7 +9,7 @@ import Board from './components/Board2';
 import Header from './components/Header';
 import SideButtons from './components/SideButtons';
 import Menu from './components/Menu';
-import * as themes from './theme';
+import themes from './theme';
 import Footer from './components/Footer';
 
 const blankSide = [{ score: 0, p1: -2, p2: -1 }];
